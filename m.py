@@ -10,12 +10,18 @@ sock.listen(1)
 
 def on_press(key):
     if key == Key.space:
-        sock.send(b"p")
+        try:
+            sock.send(b"p")
+        except:
+            pass
     elif key == Key.esc:
         sock.close()
 def on_release(key):
     if key == Key.space:
-        sock.send(b"r")
+        try:
+            sock.send(b"r")
+        except:
+            pass
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 def g_listener():
@@ -24,7 +30,7 @@ def g_listener():
             data = socket.recv(8)
             print(f"Received: {data}")
             if data == "k":
-                pass
+                print("kkkkkkkk")
         except:
             pass
 

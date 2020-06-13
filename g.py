@@ -34,7 +34,10 @@ def g_sender():
     while True:
         col = ImageGrab.grab(bbox =(1000, 1000, 1001, 1001)).getpixel((0, 0))
         if col == (135, 44, 234):
-            sock.send(b"k")
+            try:
+                sock.send(b"k")
+            except:
+                pass
 
 Thread(target=m_listener).start()
 Thread(target=g_sender).start()
