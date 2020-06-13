@@ -1,5 +1,5 @@
 import socket
-import ImageGrab
+from PIL import ImageGrab
 from pynput.keyboard import Key, Controller
 from threading import Thread
 
@@ -7,7 +7,7 @@ keyboard = Controller()
 
 address = ("192.168.1.35", 2049)
 print("Starting connection up on %s port %s" % address)
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(address)
 sock.listen(1)
 
