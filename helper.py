@@ -8,7 +8,10 @@ s.connect(("8.8.8.8", 80))
 ip = s.getsockname()[0]
 s.close()
 
-def control_panel(client, server, address, server_address):
+def control_panel(client, server):
+    address = None
+    server_address = None
+
     window = tk.Tk()
     host_text = tk.Label(window, text=f"Host IP: {ip}")
     host_text.pack()
@@ -22,8 +25,11 @@ def control_panel(client, server, address, server_address):
     port_entry.pack()
 
     def set_address():
+        global address
+        global server_address
         address = (ip_entry.get(), int(port_entry.get()))
         server_address = (ip, int(port_entry.get()))
+        print(server_address)
         print("set address")
 
     address_button = tk.Button(window, text="Set Address", command=set_address)
@@ -31,12 +37,14 @@ def control_panel(client, server, address, server_address):
 
 
     def run_client():
-        Thread(target=client).start()
+        global address
+        Thread(target=client, args=[address]).start()
         client_button['state'] = 'disabled'
 
 
     def run_server():
-        Thread(target=server).start()
+        global server_address
+        Thread(target=server, args=[server_address]).start()
         server_button['state'] = 'disabled'
 
     client_button = tk.Button(window, text="Run Client", command=run_client)

@@ -2,12 +2,10 @@ import socket
 from pynput.keyboard import Key, Listener
 from helper import *
 
-address = None
-server_address = None
 buffersize = 8
 br = True
 
-def client():
+def client(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(address)
 
@@ -36,9 +34,9 @@ def client():
     s.close()
 
 
-def server():
+def server(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(server_address)
+    s.bind(address)
     s.listen(1)
     conn, addr = s.accept()
     print('Connection address:', addr)
@@ -55,4 +53,4 @@ def server():
     conn.close()
     s.close()
 
-control_panel(client, server, address, server_address)
+control_panel(client, server)
