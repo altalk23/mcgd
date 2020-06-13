@@ -2,8 +2,11 @@ import socket
 from PIL import ImageGrab
 from pynput.keyboard import Key, Controller, Listener
 from helper import *
-from config import *
 
+address = None
+server_address = None
+buffersize = 8
+br = True
 pr = False
 
 def client():
@@ -31,6 +34,7 @@ def client():
 
 def server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print(server_address)
     s.bind(server_address)
     s.listen(1)
     conn, addr = s.accept()
@@ -55,4 +59,4 @@ def server():
     conn.close()
     s.close()
 
-control_panel(client, server)
+control_panel(client, server, address, server_address)

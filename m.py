@@ -1,7 +1,11 @@
 import socket
 from pynput.keyboard import Key, Listener
 from helper import *
-from config import *
+
+address = None
+server_address = None
+buffersize = 8
+br = True
 
 def client():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -51,4 +55,4 @@ def server():
     conn.close()
     s.close()
 
-control_panel(client, server)
+control_panel(client, server, address, server_address)

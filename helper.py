@@ -1,6 +1,5 @@
 import tkinter as tk
 import socket
-import config
 from threading import Thread
 
 
@@ -9,7 +8,7 @@ s.connect(("8.8.8.8", 80))
 ip = s.getsockname()[0]
 s.close()
 
-def control_panel(client, server):
+def control_panel(client, server, address, server_address):
     window = tk.Tk()
     host_text = tk.Label(window, text=f"Host IP: {ip}")
     host_text.pack()
@@ -23,8 +22,8 @@ def control_panel(client, server):
     port_entry.pack()
 
     def set_address():
-        config.address = (ip_entry.get(), int(port_entry.get()))
-        config.server_address = (ip, int(port_entry.get()))
+        address = (ip_entry.get(), int(port_entry.get()))
+        server_address = (ip, int(port_entry.get()))
         print("set address")
 
     address_button = tk.Button(window, text="Set Address", command=set_address)
