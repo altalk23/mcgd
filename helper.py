@@ -26,7 +26,8 @@ def control_panel(client, server):
     port_entry.pack()
 
     def set_address():
-        global address, server_address
+        global address
+        global server_address
         address = (ip_entry.get(), int(port_entry.get()))
         server_address = (ip, int(port_entry.get()))
         print("set address")

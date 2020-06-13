@@ -31,6 +31,7 @@ def client():
         pass
     s.close()
 
+
 def server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(server_address)
