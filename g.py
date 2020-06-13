@@ -2,7 +2,7 @@ import socket
 from PIL import ImageGrab
 from pynput.keyboard import Key, Controller, Listener
 from helper import *
-
+from config import *
 
 pr = False
 
