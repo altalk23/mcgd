@@ -13,11 +13,11 @@ sock.listen(1)
 
 
 def on_press(key):
-    if key == Key.escape:
+    if key == Key.esc:
         sock.close()
 with Listener(on_press=on_press) as listener:
     listener.join()
-    
+
 def m_listener():
     while True:
         try:
