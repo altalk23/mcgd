@@ -39,7 +39,7 @@ def server(address):
     s.bind(address)
     # s.listen(1)
     # conn, addr = s.accept()
-    print('Connection address:', addr)
+    # print('Connection address:', addr)
 
     while br:
         # data = conn.recv(buffersize)
