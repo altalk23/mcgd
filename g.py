@@ -5,12 +5,19 @@ from threading import Thread
 
 keyboard = Controller()
 
-address = ("192.168.1.35", 2049)
+address = ("192.168.1.35", 2050)
 print("Starting connection up on %s port %s" % address)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind(address)
 sock.listen(1)
 
+
+def on_press(key):
+    if key == Key.escape:
+        sock.close()
+with Listener(on_press=on_press) as listener:
+    listener.join()
+    
 def m_listener():
     while True:
         try:

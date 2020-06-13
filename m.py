@@ -11,6 +11,8 @@ sock.listen(1)
 def on_press(key):
     if key == Key.space:
         sock.send(b"p")
+    elif key == Key.escape:
+        sock.close()
 def on_release(key):
     if key == Key.space:
         sock.send(b"r")
