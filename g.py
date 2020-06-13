@@ -33,13 +33,14 @@ def server(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(address)
     # s.listen(1)
-    conn, addr = s.accept()
+    # conn, addr = s.accept()
     print('Connection address:', addr)
 
     keyboard = Controller()
     pr = False
     while br:
-        data = conn.recv(buffersize)
+        # data = conn.recv(buffersize)
+        data, addr = s.recvfrom(buffersize)
         print("received data (server):", data)
 
         if data == b"stop": break
