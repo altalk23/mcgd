@@ -1,0 +1,33 @@
+import socket
+import ImageGrab
+from pynput.keyboard import Key, Controller
+from threading import Thread
+
+keyboard = Controller()
+
+address = ("192.168.1.35", 2049)
+print("Starting connection up on %s port %s" % address)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind(address)
+sock.listen(1)
+
+def m_listener():
+    while True:
+        try:
+            data = socket.recv(8)
+            print(f"Received: {data}")
+            if data == b"p":
+                keyboard.press(Key.space)
+            elif data == b"r":
+                keyboard.release(Key.space)
+        except:
+            pass
+
+def g_sender():
+    while True:
+        col = ImageGrab.grab(bbox =(1000, 1000, 1001, 1001)).getpixel((0, 0))
+        if col == (135, 44, 234):
+            sock.send(b"k")
+
+Thread(target=m_listener).start()
+Thread(target=g_sender).start()
