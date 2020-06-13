@@ -38,6 +38,8 @@ def server():
     conn, addr = s.accept()
     print('Connection address:', addr)
 
+    keyboard = Controller()
+
     while br:
         data = conn.recv(buffersize)
         print("received data (server):", data)
@@ -78,7 +80,6 @@ address_button = tk.Button(window, text="Set Address", command=set_address)
 address_button.pack()
 
 def run_client():
-
     print("start client")
     Thread(target=client).start()
 
