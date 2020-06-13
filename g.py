@@ -1,6 +1,6 @@
 import socket
 from PIL import ImageGrab
-from pynput.keyboard import Key, Controller
+from pynput.keyboard import Key, Controller, Listener
 from threading import Thread
 
 keyboard = Controller()
