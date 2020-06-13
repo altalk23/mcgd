@@ -13,22 +13,26 @@ def client():
 
     def on_press(key):
         if key == Key.space:
+            print("send data (client): press")
             s.send(b"press")
+
         elif key == Key.esc:
+            global br
+            print("send data (client): stop")
             s.send(b"stop")
             br = False
             return False
 
     def on_release(key):
         if key == Key.space:
+            print("send data (client): release")
             s.send(b"release")
 
     with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
 
     while br:
-        data = s.recv(buffersize)
-        if data == b"stop": break
+        pass
     s.close()
 
 def server():
@@ -47,6 +51,7 @@ def server():
             print("club penguin is kil")
 
     conn.close()
+    s.close()
 
 Thread(target=server).start()
 Thread(target=client).start()

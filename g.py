@@ -14,6 +14,8 @@ def client():
 
     def on_press(key):
         if key == Key.esc:
+            global br
+            print("send data (client): stop")
             s.send(b"stop")
             br = False
             return False
@@ -24,10 +26,8 @@ def client():
     while br:
         col = ImageGrab.grab(bbox =(1000, 1000, 1001, 1001)).getpixel((0, 0))
         if col == (135, 44, 234):
+            print("send data (client): kill")
             s.send(b"kill")
-            
-        data = s.recv(buffersize)
-        if data == b"stop": break
     s.close()
 
 def server():
@@ -49,8 +49,8 @@ def server():
         elif data == b"release":
             keyboard.release(Key.space)
             print("release")
-
     conn.close()
+    s.close()
 
 
 Thread(target=server).start()
