@@ -2,9 +2,9 @@ import socket
 from PIL import ImageGrab
 from pynput.keyboard import Key, Controller, Listener
 from threading import Thread
+import tkinter as tk
 
-ip = "192.168.1.35"
-address = (ip, 55000)
+address = None
 buffersize = 16
 br = True
 
@@ -53,5 +53,37 @@ def server():
     s.close()
 
 
-Thread(target=server).start()
-Thread(target=client).start()
+window = tk.Tk()
+ip_text = tk.Label(window, text="Connection IP:")
+ip_entry = tk.Entry(window)
+ip_text.pack()
+ip_entry.pack()
+port_text = tk.Label(window, text="Connection Port:")
+port_entry = tk.Entry(window)
+port_text.pack()
+port_entry.pack()
+
+def set_address():
+    global address
+    address = (ip_entry.get(), int(port_entry.get()))
+    print("set address")
+
+address_button = tk.Button(window, text="Set Address", command=set_address)
+address_button.pack()
+
+def run_client():
+
+    print("start client")
+    Thread(target=client).start()
+
+def run_server():
+    global address
+    address = (ip_entry.get(), int(port_entry.get()))
+    print("start server")
+    Thread(target=server).start()
+
+client_button = tk.Button(window, text="Run Client", command=run_client)
+server_button = tk.Button(window, text="Run Server", command=run_server)
+client_button.pack()
+server_button.pack()
+window.mainloop()
