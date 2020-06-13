@@ -17,7 +17,7 @@ def client():
             s.send(b"stop")
             br = False
             return False
-            
+
     with Listener(on_press=on_press) as listener:
         listener.join()
 
@@ -25,6 +25,9 @@ def client():
         col = ImageGrab.grab(bbox =(1000, 1000, 1001, 1001)).getpixel((0, 0))
         if col == (135, 44, 234):
             s.send(b"kill")
+            
+        data = s.recv(buffersize)
+        if data == b"stop": break
     s.close()
 
 def server():

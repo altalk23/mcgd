@@ -18,7 +18,7 @@ def client():
             s.send(b"stop")
             br = False
             return False
-            
+
     def on_release(key):
         if key == Key.space:
             s.send(b"release")
@@ -27,7 +27,8 @@ def client():
         listener.join()
 
     while br:
-        pass
+        data = s.recv(buffersize)
+        if data == b"stop": break
     s.close()
 
 def server():
