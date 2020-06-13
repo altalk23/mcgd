@@ -5,14 +5,13 @@ from helper import *
 
 buffersize = 8
 br = True
-pr = False
 
 def client(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(address)
 
     def on_press(key):
-        if key == Key.esc:
+        if key == Key.delete:
             global br
             print("send data (client): stop")
             s.send(b"stop")
@@ -31,14 +30,14 @@ def client(address):
 
 
 def server(address):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(address)
     s.listen(1)
     conn, addr = s.accept()
     print('Connection address:', addr)
 
     keyboard = Controller()
-
+    pr = False
     while br:
         data = conn.recv(buffersize)
         print("received data (server):", data)
@@ -55,5 +54,6 @@ def server(address):
             pr = False
     conn.close()
     s.close()
+
 
 control_panel(client, server)

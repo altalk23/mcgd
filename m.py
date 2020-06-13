@@ -14,7 +14,7 @@ def client(address):
             print("send data (client): press")
             s.send(b"press")
 
-        elif key == Key.esc:
+        elif key == Key.delete:
             global br
             print("send data (client): stop")
             s.send(b"stop")
@@ -35,7 +35,7 @@ def client(address):
 
 
 def server(address):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(address)
     s.listen(1)
     conn, addr = s.accept()
