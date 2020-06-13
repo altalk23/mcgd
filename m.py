@@ -56,6 +56,10 @@ def server():
 
 
 window = tk.Tk()
+host_text = tk.Label(window, text="Host IP:")
+host_entry = tk.Entry(window)
+host_text.pack()
+host_entry.pack()
 ip_text = tk.Label(window, text="Connection IP:")
 ip_entry = tk.Entry(window)
 ip_text.pack()
@@ -68,7 +72,7 @@ port_entry.pack()
 def set_address():
     global address, server_address
     address = (ip_entry.get(), int(port_entry.get()))
-    server_address = ("127.0.0.1", int(port_entry.get()))
+    server_address = (host_entry.get(), int(port_entry.get()))
     print("set address")
 
 address_button = tk.Button(window, text="Set Address", command=set_address)
