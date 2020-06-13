@@ -1,6 +1,6 @@
 import socket
 from threading import Thread
-TCP_IP = '127.0.0.1'
+TCP_IP = '192.168.0.30'
 TCP_PORT = 55000
 BUFFER_SIZE = 64
 MESSAGE = b"Hello, World!"
@@ -30,4 +30,3 @@ def server():
 
 
 Thread(target=server).start()
-Thread(target=client).start()

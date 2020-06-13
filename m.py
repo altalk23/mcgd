@@ -4,6 +4,7 @@ from threading import Thread
 import tkinter as tk
 
 address = None
+server_address = None
 buffersize = 16
 br = True
 
@@ -37,7 +38,7 @@ def client():
 
 def server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind(address)
+    s.bind(server_address)
     s.listen(2)
     conn, addr = s.accept()
     print('Connection address:', addr)
@@ -65,8 +66,9 @@ port_text.pack()
 port_entry.pack()
 
 def set_address():
-    global address
+    global address, server_address
     address = (ip_entry.get(), int(port_entry.get()))
+    server_address = ("127.0.0.1", int(port_entry.get()))
     print("set address")
 
 address_button = tk.Button(window, text="Set Address", command=set_address)
