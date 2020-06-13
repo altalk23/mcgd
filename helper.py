@@ -1,6 +1,6 @@
-from threading import Thread
 import tkinter as tk
 import socket
+from threading import Thread
 
 address = None
 server_address = None
@@ -13,6 +13,7 @@ ip = s.getsockname()[0]
 s.close()
 
 def control_panel(client, server):
+    global address, server_address
     window = tk.Tk()
     host_text = tk.Label(window, text=f"Host IP: {ip}")
     host_text.pack()
@@ -26,8 +27,7 @@ def control_panel(client, server):
     port_entry.pack()
 
     def set_address():
-        global address
-        global server_address
+        global address, server_address
         address = (ip_entry.get(), int(port_entry.get()))
         server_address = (ip, int(port_entry.get()))
         print("set address")
