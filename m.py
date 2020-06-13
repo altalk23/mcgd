@@ -38,7 +38,7 @@ def client():
 def server():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind(address)
-    s.listen(1)
+    s.listen(2)
     conn, addr = s.accept()
     print('Connection address:', addr)
 
