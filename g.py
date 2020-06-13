@@ -32,7 +32,7 @@ def client(address):
 def server(address):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(address)
-    s.listen(1)
+    # s.listen(1)
     conn, addr = s.accept()
     print('Connection address:', addr)
 
